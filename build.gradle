@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.2'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', "2021.0.8")
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web' // web server
+    implementation 'org.springframework.cloud:spring-cloud-starter-config' // client config
+    implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp' // amqp
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client' // eureka
+    developmentOnly 'org.springframework.boot:spring-boot-devtools' // devtool
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // test
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // junit
+
+    implementation 'org.springframework.boot:spring-boot-starter-actuator' // actuator
+    // swagger ui
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

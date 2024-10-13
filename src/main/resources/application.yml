@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: spring-cloud-bus
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8888
+    bus:
+      enabled: true
+      refresh:
+        enabled: true
+      trace:
+        enabled: true
+      env:
+        enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # expose all routs
+logging:
+  level:
+    org.springframework.cloud: DEBUG

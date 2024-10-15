@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RefreshScope
+@RefreshScope // To make see new files to send an empty POST request to ‘/refresh’ by actuator
 public class BusConfigController {
     @Value("${api.version}")
     String apiVer;

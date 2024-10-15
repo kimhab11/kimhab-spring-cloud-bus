@@ -2,20 +2,21 @@ spring:
   application:
     name: spring-cloud-bus
   config:
-    import: optional:configserver:http://localhost:8888
+    # optional keyword means the application will still start even if the config server is unavailable.
+    import: optional:configserver:http://localhost:8888 #
   cloud:
     config:
-      enabled: true
+      enabled:  # broadcasting state changes
       uri: http://localhost:8888
     bus:
       enabled: true
       refresh:
-        enabled: true
+        enabled: true # Enables the /bus/refresh endpoint to refresh configurations
       trace:
-        enabled: true
+        enabled: true # Enables tracing for the bus events
       env:
-        enabled: true
-  rabbitmq:
+        enabled: true # Enables the /bus/env endpoint to update environment properties
+  rabbitmq: # RabbitMQ Configuration
     host: localhost
     port: 5672
     username: guest
